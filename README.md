@@ -35,6 +35,8 @@ A small example of a config:
         {
             "serial": "XXXX",
             "password": "XXXX",
+            "address": "XXXX",
+            "port": "XXXX",
             "topics": [
                 {
                     "type": "status",
@@ -123,6 +125,12 @@ Serial number for the Alsavo heat pump (find it by clicking on the top-right log
 
 #### alsavo_password
 Password for the Alsavo heat pump
+
+#### alsavo_address
+IP Address to the heat pump on your local network
+
+#### alsavo_port
+Port to the heat pump on your local network
 
 #### publish_interval
 *[optional, default 300]* Number of seconds between each status publish
