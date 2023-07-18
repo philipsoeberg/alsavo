@@ -1,11 +1,11 @@
 # com.haislund.homeassistant.alsavo
 
-Debian Docker image that publishes states from an Alsavo Heat Pump (taken from the Alsavo Pro Cloud Server) to MQTT and a description of how to configure Home Assistant to use the values.
+Debian Docker image that publishes states from an Alsavo Heat Pump (taken from the Alsavo Pro Heater Locally using the IP) to MQTT and a description of how to configure Home Assistant to use the values.
 
 The Docker image uses a compiled version of AlsavoCtrl developed by Mikko Strandborg - [GitHub link](https://github.com/strandborg/AlsavoCtrl).
 
 # Docker container
-An already build image is available at Docker Hub: peterhaislund/alsavo_status
+An already build image is available at Docker Hub: woopstar/alsavo_status
 
 ## Logging
 Logs are written to /data/alsavo_status.log so mapping the /data directory to the Docker host might be a good idea.
@@ -143,7 +143,7 @@ Example of creating/running the container:
 
 ```
 docker image pull peterhaislund/alsavo_status
-docker create -e alsavo_serial=XXXXXXXXX -e alsavo_password=XXXXXX -e mqtt_server=192.168.1.128 -e TZ=Europe/Copenhagen -v /volume1/docker/alsavo_status:/data --name alsavo_status peterhaislund/alsavo_status
+docker create -e alsavo_serial=XXXXXXXXX -e alsavo_password=XXXXXX -e alsavo_address=192.168.1.127 -e alsavo_port=1194 -e mqtt_server=192.168.1.128 -e TZ=Europe/Copenhagen -v /volume1/docker/alsavo_status:/data --name alsavo_status peterhaislund/alsavo_status
 ```
 
 It is recommended to map the /data directory in the container to the Docker host.
