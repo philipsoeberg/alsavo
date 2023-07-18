@@ -42,7 +42,7 @@ def query_heatpump(heatpump):
     #with open("C:/temp/alsavo.txt") as f:
     #    response = f.readlines()
  
-    response = subprocess.check_output(["/app/AlsavoCtrl", "-s", heatpump["serial"], "-l", heatpump["password"]], text=True, universal_newlines=True)
+    response = subprocess.check_output(["/app/AlsavoCtrl", "-s", heatpump["serial"], "-l", heatpump["password"]], "-a", heatpump["address"]], "-p", heatpump["port"]], text=True, universal_newlines=True)
  
     return response
 
