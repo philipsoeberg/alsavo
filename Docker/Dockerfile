@@ -35,6 +35,8 @@ ENV mqtt_server_user=None
 ENV mqtt_server_password=None
 ENV alsavo_password=None
 ENV alsavo_serial=None
+ENV alsavo_port=None
+ENV alsavo_address=None
 ENV publish_interval=300
 ENV log_size=1000
 
