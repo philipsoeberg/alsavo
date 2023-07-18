@@ -42,6 +42,8 @@ class Config:
                     {
                         "serial": os.getenv("alsavo_serial"),
                         "password": os.getenv("alsavo_password"),
+                        "address": os.getenv("alsavo_address"),
+                        "port": os.getenv("alsavo_port"),
                         "topics": [                            
                             {
                                 "type": "status",
