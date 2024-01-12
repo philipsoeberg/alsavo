@@ -11,22 +11,24 @@ RUN apt-get update && \
         apt-get install -y git
 		
 #### Copy AlsavoCtrl files to image
-RUN git clone https://github.com/strandborg/AlsavoCtrl.git
+RUN git clone https://github.com/philipsoeberg/alsavo.git
 
-WORKDIR /AlsavoCtrl
+WORKDIR /alsavo
 
 #### Build AlsavoCtrl
 RUN mkdir build
 
-WORKDIR /AlsavoCtrl/build
+WORKDIR /alsavo/build
 
-RUN cmake ..
+RUN cmake ../AlsavoCtrl
 RUN make
 
 ####################################################################################
 #### Build final image
 ####################################################################################
-FROM debian
+FROM debian as base
+
+RUN apt-get update && apt install -y python3-paho-mqtt
 
 #### Define variables
 ENV mqtt_server=None
@@ -41,19 +43,13 @@ ENV publish_interval=300
 ENV log_size=1000
 
 #### Copy files
-RUN mkdir app
-RUN mkdir data
+RUN mkdir app data
 
 COPY --from=build \
-    ./AlsavoCtrl/build/AlsavoCtrl \
+    ./alsavo/build/AlsavoCtrl \
     ./app/
 COPY /app.py /app/app.py
 COPY /config.py /app/config.py
-
-#### Install dependencies
-RUN apt-get update && \
-        apt install -y python3-pip && \
-	    apt install -y python3-paho-mqtt
 
 #### Set app.py as image main process
 CMD [ "python3", "/app/app.py"]
